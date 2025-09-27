@@ -1,0 +1,327 @@
+/* CSS Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+}
+
+/* Game Container */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Game Info Section */
+.game-info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.player-info {
+    min-width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.white-player {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+}
+
+.black-player {
+    background-color: #333;
+    color: white;
+    border: 1px solid #222;
+}
+
+.captured-pieces {
+    min-height: 50px;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.game-status {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.current-turn {
+    margin-bottom: 10px;
+    color: #2980b9;
+}
+
+.game-message {
+    color: #e74c3c;
+    height: 20px;
+}
+
+/* Chessboard */
+.chessboard-container {
+    display: flex;
+    position: relative;
+}
+
+.board-coordinates {
+    display: flex;
+}
+
+.rank-coordinates {
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.file-coordinates {
+    justify-content: space-around;
+    padding-top: 10px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.chessboard-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#chessboard {
+    width: 560px;
+    height: 560px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    border: 3px solid #333;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.square {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.white {
+    background-color: #f0d9b5;
+}
+
+.black {
+    background-color: #b58863;
+}
+
+.piece {
+    width: 80%;
+    height: 80%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: grab;
+    z-index: 10;
+    transition: transform 0.1s ease-in-out;
+}
+
+.piece:active {
+    cursor: grabbing;
+    transform: scale(1.1);
+}
+
+/* Chess Pieces */
+/* Use Unicode symbols as fallback instead of images that don't exist yet */
+.piece {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    user-select: none;
+}
+
+.white.pawn::after { content: '♙'; }
+.white.rook::after { content: '♖'; }
+.white.knight::after { content: '♘'; }
+.white.bishop::after { content: '♗'; }
+.white.queen::after { content: '♕'; }
+.white.king::after { content: '♔'; }
+
+.black.pawn::after { content: '♟'; }
+.black.rook::after { content: '♜'; }
+.black.knight::after { content: '♞'; }
+.black.bishop::after { content: '♝'; }
+.black.queen::after { content: '♛'; }
+.black.king::after { content: '♚'; }
+
+/* Original image-based styles (commented out until images are available) */
+/*
+.white.pawn { background-image: url('../images/white-pawn.png'); }
+.white.rook { background-image: url('../images/white-rook.png'); }
+.white.knight { background-image: url('../images/white-knight.png'); }
+.white.bishop { background-image: url('../images/white-bishop.png'); }
+.white.queen { background-image: url('../images/white-queen.png'); }
+.white.king { background-image: url('../images/white-king.png'); }
+
+.black.pawn { background-image: url('../images/black-pawn.png'); }
+.black.rook { background-image: url('../images/black-rook.png'); }
+.black.knight { background-image: url('../images/black-knight.png'); }
+.black.bishop { background-image: url('../images/black-bishop.png'); }
+.black.queen { background-image: url('../images/black-queen.png'); }
+.black.king { background-image: url('../images/black-king.png'); }
+*/
+
+/* Highlighting */
+.square.selected {
+    box-shadow: inset 0 0 0 4px rgba(57, 123, 249, 0.8);
+}
+
+.square.valid-move {
+    position: relative;
+}
+
+.square.valid-move::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(57, 123, 249, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.square.check {
+    background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
+.square.last-move {
+    background-color: rgba(255, 255, 0, 0.3) !important;
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #3498db;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Promotion Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px;
+}
+
+.modal h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.promotion-pieces {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.promotion-piece {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.promotion-piece:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    #chessboard {
+        width: 400px;
+        height: 400px;
+    }
+
+    .square {
+        width: 50px;
+        height: 50px;
+    }
+
+    .game-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .player-info {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+}
